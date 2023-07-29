@@ -1,15 +1,30 @@
 const OrderModel = require("../model/OrderModel");
 
 const createOrder = async (req, res) => {
-  const { name, email, address, phone, totalAmount, cart } = req.body;
+  const {
+    cart,
+    name,
+    address,
+    phone,
+    totalAmount,
+    user,
+    isPaid,
+    paidAt,
+    isDelivered,
+    deliveredAt,
+  } = req.body;
   try {
     const data = await OrderModel.create({
       cart,
       name,
-      email,
       address,
       phone,
       totalAmount,
+      user,
+      isPaid,
+      paidAt,
+      isDelivered,
+      deliveredAt,
     });
     res.send({
       status: "SUCCESS",
@@ -59,9 +74,36 @@ const detailOrder = async (req, res) => {
     });
   }
 };
-
+const updateOrder = async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    const data = req.body;
+    const checkOrder = await OrderModel.findOne({
+      _id: orderId,
+    });
+    if (checkOrder === null) {
+      res.send({
+        status: "ERR",
+        message: "THE ORDER IS NOT DEFINE",
+      });
+    }
+    const updateOrder = await OrderModel.findByIdAndUpdate(orderId, data, {
+      new: true,
+    });
+    res.send({
+      status: "SUCCESS",
+      message: "UPDATE ORDER SUCCESS",
+      data: updateOrder,
+    });
+  } catch (e) {
+    return res.status(404).json({
+      message: e,
+    });
+  }
+};
 module.exports = {
   createOrder,
   getOrder,
   detailOrder,
+  updateOrder,
 };

@@ -9,7 +9,7 @@ const OrderController = require("../controllers/OrderController");
 const initWebRouter = (app) => {
   //User
   router.post("/users/register", UserController.createUser);
-  router.post("/uers/login", UserController.loginUser);
+  router.post("/users/login", UserController.loginUser);
   router.get("/users/getAll", UserController.getUser);
   router.delete("/users/delete/:id", UserController.deleteUser);
   router.put("/users/update/:id", UserController.updateUser);
@@ -25,6 +25,7 @@ const initWebRouter = (app) => {
   router.post("/order", OrderController.createOrder);
   router.get("/order/getAll", OrderController.getOrder);
   router.get("/order/detail/:id", OrderController.detailOrder);
+  router.put("/order/update/:id", OrderController.updateOrder);
 
   return app.use("/", router);
 };
