@@ -16,7 +16,7 @@ router(app);
 
 mongoose
   .connect(
-    `mongodb+srv://thaiduong:${process.env.MongooDB}@cluster0.vqemzeu.mongodb.net/?retryWrites=true&w=majority`
+    `mongodb+srv://thaiduong:${process.env.MongooDB}@cluster0.kda5elg.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
   )
   .then(() => console.log("Connect data successfull"))
   .catch(() => console.log("fall"));
