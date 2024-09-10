@@ -2,13 +2,33 @@ const ProductModel = require("../model/ProductModel");
 
 const createProduct = async (req, res) => {
   try {
-    const { name, price, description, image, category } = req.body;
+    const {
+      name,
+      price,
+      category,
+      description,
+      image,
+      type,
+      author,
+      supplier,
+      publisher,
+      page,
+      language,
+      yearPublish,
+    } = req.body;
     const data = await ProductModel.create({
       name,
       price,
       category,
       description,
       image,
+      type,
+      author,
+      supplier,
+      publisher,
+      page,
+      language,
+      yearPublish,
     });
     res.send({ status: "SUCCESS", message: "Create product", data: data });
   } catch (error) {

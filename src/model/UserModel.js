@@ -8,6 +8,10 @@ const UserModel = new Schema(
     phone: { type: String, required: true },
     address: { type: String, required: true },
     isAdmin: { type: Boolean },
+    order: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "orders",
+    },
   },
   {
     timestamps: true,

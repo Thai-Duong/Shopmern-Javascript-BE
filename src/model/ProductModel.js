@@ -6,6 +6,13 @@ const ProductModel = new Schema(
     description: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
+    type: { type: String, required: true },
+    author: { type: String },
+    supplier: { type: String },
+    publisher: { type: String },
+    page: { type: Number },
+    language: { type: String },
+    yearPublish: { type: Date },
   },
   {
     timestamps: true,
