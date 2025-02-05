@@ -101,9 +101,37 @@ const updateOrder = async (req, res) => {
     });
   }
 };
+const getUserOrders = async (req, res) => {
+  const userId = req.params.id; // Lấy userId từ URL params
+  console.log(userId);
+  try {
+    const orders = await OrderModel.find({ user: userId }).sort({
+      createdAt: -1,
+    });
+
+    if (!orders || orders.length === 0) {
+      return res.status(404).json({
+        status: "ERR",
+        message: "No orders found for this user",
+      });
+    }
+
+    res.status(200).json({
+      status: "SUCCESS",
+      message: "User orders retrieved successfully",
+      data: orders,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      status: "ERROR",
+      message: error.message,
+    });
+  }
+};
 module.exports = {
   createOrder,
   getOrder,
   detailOrder,
   updateOrder,
+  getUserOrders,
 };

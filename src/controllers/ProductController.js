@@ -5,6 +5,7 @@ const createProduct = async (req, res) => {
     const {
       name,
       price,
+      price_before_discount,
       category,
       description,
       image,
@@ -19,6 +20,7 @@ const createProduct = async (req, res) => {
     const data = await ProductModel.create({
       name,
       price,
+      price_before_discount,
       category,
       description,
       image,
@@ -33,7 +35,7 @@ const createProduct = async (req, res) => {
     res.send({ status: "SUCCESS", message: "Create product", data: data });
   } catch (error) {
     return res.status(404).json({
-      message: e,
+      message: error,
     });
   }
 };
@@ -105,9 +107,25 @@ const updateProduct = async (req, res) => {
     });
   }
 };
+const searchProduct = async (req, res) => {
+  try {
+    const { query } = req.query;
+    console.log(query);
+    const products = await ProductModel.find({
+      $or: [
+        { name: { $regex: query, $options: "i" } },
+        { description: { $regex: query, $options: "i" } },
+      ],
+    });
+    res.json(products);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
 module.exports = {
   createProduct,
   getAllProduct,
   deleteProduct,
   updateProduct,
+  searchProduct,
 };

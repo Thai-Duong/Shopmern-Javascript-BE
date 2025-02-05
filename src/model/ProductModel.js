@@ -6,6 +6,7 @@ const ProductModel = new Schema(
     description: { type: String, required: true },
     image: { type: String, required: true },
     price: { type: Number, required: true },
+    price_before_discount: { type: Number, required: true },
     type: { type: String, required: true },
     author: { type: String },
     supplier: { type: String },

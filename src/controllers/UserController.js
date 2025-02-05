@@ -2,7 +2,7 @@ const UserModel = require("../model/UserModel");
 
 const createUser = async (req, res) => {
   try {
-    const { email, password, name, address, phone } = req.body;
+    const { email, password, name, address, phone, isAdmin } = req.body;
     const checkUser = await UserModel.findOne({
       email: email,
     });
@@ -15,6 +15,7 @@ const createUser = async (req, res) => {
         name,
         address,
         phone,
+        isAdmin,
       });
       res.send({ message: "SUCCESS" });
     }
