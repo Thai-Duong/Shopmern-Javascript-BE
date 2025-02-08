@@ -64,7 +64,6 @@ const getFeedbackByUserId = async (req, res) => {
 const getFeedBack = async (req, res) => {
   try {
     const feedback = await FeedbackModel.find();
-    console.log("feedback", feedback); // In ra feedback để kiểm tra
     res.send({
       status: "SUCCESS",
       message: "All Feedbacks were successfully",
